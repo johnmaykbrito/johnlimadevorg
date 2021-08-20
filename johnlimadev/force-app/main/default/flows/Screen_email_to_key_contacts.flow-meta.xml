@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Send out a simple e-mail.</description>
+        <name>Send_Simple_Email</name>
+        <label>Send Simple Email</label>
+        <locationX>864</locationX>
+        <locationY>566</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Description_Email_Sent</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>EmailBody</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>Loop_Key_Contacts.Email</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>EmailSubject</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>52.0</apiVersion>
+    <assignments>
+        <name>Description_Email_Sent</name>
+        <label>Description = Email Sent</label>
+        <locationX>864</locationX>
+        <locationY>686</locationY>
+        <assignmentItems>
+            <assignToReference>Loop_Key_Contacts.Description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Email Sent</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>KeyContactCollection</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>KeyContactCollection</name>
+        <label>KeyContactCollection</label>
+        <locationX>864</locationX>
+        <locationY>806</locationY>
+        <assignmentItems>
+            <assignToReference>FinalContactCollection</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_Key_Contacts</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Key_Contacts</targetReference>
+        </connector>
+    </assignments>
+    <formulas>
+        <name>IsKeyContact</name>
+        <dataType>String</dataType>
+        <expression>IF({!Loop_Key_Contacts.Key_Contact__c},
+&apos;Yes&apos;,
+&apos;No&apos;
+)</expression>
+    </formulas>
+    <interviewLabel>Screen - {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Screen - Email to Key Contacts</label>
+    <loops>
+        <name>Loop_Key_Contacts</name>
+        <label>Loop Key Contacts</label>
+        <locationX>776</locationX>
+        <locationY>446</locationY>
+        <collectionReference>GetContact_Record</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Send_Simple_Email</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Update_Key_Contacts</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <name>GetContact_Record</name>
+        <label>GetContact Record</label>
+        <locationX>776</locationX>
+        <locationY>326</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_Key_Contacts</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Key_Contact__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Email</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>AccountId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Contact</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_Key_Contacts</name>
+        <label>Update Key Contacts</label>
+        <locationX>776</locationX>
+        <locationY>1022</locationY>
+        <connector>
+            <targetReference>EmailSentScreen</targetReference>
+        </connector>
+        <inputReference>FinalContactCollection</inputReference>
+    </recordUpdates>
+    <screens>
+        <name>Email_Confirmation_Screen</name>
+        <label>Email Confirmation Screen</label>
+        <locationX>776</locationX>
+        <locationY>206</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>GetContact_Record</targetReference>
+        </connector>
+        <fields>
+            <name>ScrennMessage</name>
+            <fieldText>&lt;p&gt;Are you sure?&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>EmailSentScreen</name>
+        <label>EmailSentScreen</label>
+        <locationX>776</locationX>
+        <locationY>1142</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>EmailSentScreenText</name>
+            <fieldText>&lt;p&gt;&lt;b&gt;The emails have been sent to the key contacts!&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <start>
+        <locationX>650</locationX>
+        <locationY>48</locationY>
+        <connector>
+            <targetReference>Email_Confirmation_Screen</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>EmailBody</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Hi {!Loop_Key_Contacts.Name},
+
+See details:
+Company - {!Loop_Key_Contacts.Account.Name}
+Key Contact - {!IsKeyContact}
+Email - {!Loop_Key_Contacts.Email}
+Title - {!Loop_Key_Contacts.Title}
+
+Regards.</text>
+    </textTemplates>
+    <textTemplates>
+        <name>EmailSubject</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Greetings!!!</text>
+    </textTemplates>
+    <variables>
+        <name>FinalContactCollection</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Contact</objectType>
+    </variables>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

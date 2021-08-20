@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>johnmaykbrito@gmail.com</contactEmail>
+    <contactPhone>81995830166</contactPhone>
+    <ipRanges>
+        <end>192.168.0.255</end>
+        <start>192.168.0.1</start>
+    </ipRanges>
+    <label>ConnectedTest</label>
+    <oauthConfig>
+        <callbackUrl>https://johnlima-dev-ed.lightning.force.com/callback</callbackUrl>
+        <consumerKey>3MVG9KsVczVNcM8xw98noWJmRt6IQrr59zNt5c_Ez5jpgVkHznUKp0XwlUyyR0goAzQUxk1ewg7tDo2SJ3JeB</consumerKey>
+        <isAdminApproved>false</isAdminApproved>
+        <isConsumerSecretOptional>false</isConsumerSecretOptional>
+        <isIntrospectAllTokens>false</isIntrospectAllTokens>
+        <isSecretRequiredForRefreshToken>false</isSecretRequiredForRefreshToken>
+        <scopes>Api</scopes>
+        <scopes>Full</scopes>
+    </oauthConfig>
+    <oauthPolicy>
+        <ipRelaxation>ENFORCE</ipRelaxation>
+        <refreshTokenPolicy>infinite</refreshTokenPolicy>
+    </oauthPolicy>
+</ConnectedApp>

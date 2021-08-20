@@ -1,0 +1,57 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+  <aura:handler event="c:ConsultaCnpjResultadoEvent" action="{!c.handleComponentEvent}" />
+  <aura:attribute name="empresas" type="List[]" />
+
+  <aura:iteration items="{!v.empresas}" var="empresa">
+    <div class="slds-box slds-m-around_x-small">
+    <lightning:layout multipleRows="true">
+        <lightning:layoutItem size="12" padding="">
+          <article class="slds-card">
+            <div class="slds-card__header slds-grid slds-page-header">
+              <header
+                class="slds-media slds-media_center slds-has-flexi-truncate"
+              >
+                <div class="slds-media__figure">
+                  <span
+                    class="slds-icon_container slds-icon-standard-account"
+                    title="account"
+                  >
+                    <div class="icon-container">
+                      <lightning:icon
+                        iconName="action:fallback"
+                        size="large"
+                        alternativeText="Atribuição de Modelos de Cuidado"
+                        title="Atribuição de Modelos de Cuidado"
+                      />
+                    </div>
+                    <span class="slds-assistive-text">{!empresa.nome}</span>
+                  </span>
+                </div>
+                <div class="slds-media__body">
+                  <h2 class="slds-card__header-title">
+                    <div>{!empresa.nome}</div>
+                    <div>{!empresa.cnpj}</div>
+                  </h2>
+                </div>
+              </header>
+            </div>
+          </article>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="12" padding="around-small">
+          <c:companyInfoCmp company="{!empresa}" />
+        </lightning:layoutItem>
+        <lightning:layoutItem size="12" padding="">
+          <lightning:button
+            aura:id="add"
+            label="Usar"
+            iconName="utility:add"
+            variant="base"
+            onclick="{!c.act}"
+            disabled="false"
+            value="{!empresa}"
+          />
+        </lightning:layoutItem>
+      </lightning:layout>
+    </div>
+  </aura:iteration>
+</aura:component>

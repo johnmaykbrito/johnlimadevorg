@@ -1,0 +1,40 @@
+<aura:component implements="force:lightningQuickAction,flexipage:availableForAllPageTypes" access="global" >
+    <ltng:require styles="{!$Resource.Calc_Model_Width_Expand + '/calc_modal.css'}" />
+    <div class="slds-p-left_x-large" onkeyup="{! c.handleKeyPress }">
+        <span>
+            <lightning:textarea aura:id="calc_screen" name="calc_output" readonly="true" class="txt_height txt_width" maxlength="100" messageWhenValueMissing="A value in this field is required."/>
+        </span>
+        <div class="margin_for_btn_divs">
+            <lightning:button label="7" title="Neutral action" onclick="{! c.handleClick }" value="7" class="slds-p-horizontal_medium"/>
+            <lightning:button label="8" title="Neutral action" onclick="{! c.handleClick }" value="8" class="slds-p-horizontal_medium"/>
+            <lightning:button label="9" title="Neutral action" onclick="{! c.handleClick }" value="9" class="slds-p-horizontal_medium"/>
+            <lightning:button label="+" title="Neutral action" onclick="{! c.handleClick }" value="+" class="slds-p-horizontal_medium"/>
+        </div>
+        <div class="margin_for_btn_divs">
+            <lightning:button label="4" title="Neutral action" onclick="{! c.handleClick }" value="4" class="slds-p-horizontal_medium"/>
+            <lightning:button label="5" title="Neutral action" onclick="{! c.handleClick }" value="5" class="slds-p-horizontal_medium"/>
+            <lightning:button label="6" title="Neutral action" onclick="{! c.handleClick }" value="6" class="slds-p-horizontal_medium"/>
+            <lightning:button label="-" title="Neutral action" onclick="{! c.handleClick }" value="-" class="padding_for_minus"/>
+        </div>
+        <div class="margin_for_btn_divs">
+            <lightning:button label="1" title="Neutral action" onclick="{! c.handleClick }" value="1" class="slds-p-horizontal_medium"/>
+            <lightning:button label="2" title="Neutral action" onclick="{! c.handleClick }" value="2" class="slds-p-horizontal_medium"/>
+            <lightning:button label="3" title="Neutral action" onclick="{! c.handleClick }" value="3" class="slds-p-horizontal_medium"/>
+            <lightning:button label="*" title="Neutral action" onclick="{! c.handleClick }" value="*" class="slds-p-horizontal_medium"/>
+        </div>
+        <div class="margin_for_btn_divs">
+            <lightning:button label="0" title="Neutral action" onclick="{! c.handleClick }" value="0" class="slds-p-horizontal_medium"/>
+            <lightning:button label="." title="Neutral action" onclick="{! c.handleClick }" value="." class="padding_for_dot"/>
+            <lightning:button label="=" title="Neutral action" onclick="{! c.handleClick }" value="=" class="slds-p-horizontal_medium"/>
+            <lightning:button label="/" title="Neutral action" onclick="{! c.handleClick }" value="/" class="slds-p-horizontal_medium"/>
+        </div>
+        <div class="margin_for_btn_divs">
+            <lightning:button label="(" title="Neutral action" onclick="{! c.handleClick }" value="(" class="padding_for_parenthesis"/>
+            <lightning:button label=")" title="Neutral action" onclick="{! c.handleClick }" value=")" class="padding_for_parenthesis"/>
+        </div>
+        <div class="margin_for_btn_divs">
+            <lightning:button label="CE" title="Neutral action" onclick="{! c.handleClick }" value="ce" class="padding_for_ac_ce"/>
+            <lightning:button label="AC" title="Neutral action" onclick="{! c.handleClick }" value="ac" class="padding_for_ac_ce"/>
+        </div>
+    </div>
+</aura:component>

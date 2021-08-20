@@ -1,0 +1,32 @@
+.THIS .slds-theme_backgroundColor-blue {
+    background-color: blue;
+} 
+
+.THIS .margin_for_btn_divs {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.THIS .padding_for_dot {   
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+.THIS .padding_for_minus {   
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+.THIS .txt_width {   
+    width: 180px;
+}
+
+.THIS .padding_for_parenthesis {   
+    padding-left: 17px;
+    padding-right: 18px;
+}
+
+.THIS .padding_for_ac_ce {   
+    padding-left: 34px;
+    padding-right: 34px;
+}

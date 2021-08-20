@@ -1,0 +1,27 @@
+/* For select ALL TOP level <p> element */
+ 
+p.THIS {
+    color: blue;
+    font-weight: bold;
+}
+ 
+/* For select ALL TOP level <Div> element with class Name "divCss" */
+ 
+.divCss.THIS {
+    padding: 20px;
+    background-color: white;
+}
+ 
+/* For select ALL Nested level H1 elements */
+ 
+.THIS H1 {
+    color: black;
+    font-size: 22px;
+}
+ 
+/* For select ALL Nested level <p> element */
+ 
+.THIS p {
+    color: red;
+    font-weight: lighter;
+}

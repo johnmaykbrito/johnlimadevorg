@@ -1,0 +1,13 @@
+<aura:component>
+    <aura:registerEvent name="bubblingEvent" type="c:OfferSPANotifierEvent" />     
+
+<p>OFFER PREVIEW</p>
+    
+
+    <div>    
+        <lightning:buttonGroup >
+            <lightning:button label="Back" onclick="{!c.goBack}" />
+            <lightning:button label="Confirm and Send" onclick="{!c.goNext}" />
+        </lightning:buttonGroup>
+    </div>
+</aura:component>

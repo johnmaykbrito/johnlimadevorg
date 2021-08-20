@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Auto_escola__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Auto-escola</description>
+    <externalId>false</externalId>
+    <label>Auto-escola</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Provas</relationshipLabel>
+    <relationshipName>Provas</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

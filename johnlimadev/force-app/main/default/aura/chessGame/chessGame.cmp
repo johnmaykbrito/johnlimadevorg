@@ -1,0 +1,204 @@
+<aura:component controller="ChessApexCTRL" implements="flexipage:availableForAllPageTypes" access="global" >
+    <!-- EMP API component -->
+    <lightning:empApi aura:id="empApi" />
+    
+    <!-- Calls the onInit controller function on component initalization -->
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+    
+    <!-- Holds the streaming event subscription -->
+    <aura:attribute name="subscription" type="Map" />
+    
+    
+    <!-- Informs if the piece has been chosen -->
+    <aura:attribute name="hasChosenWhite" type="Boolean" default="false"/>
+    <aura:attribute name="hasChosenBlack" type="Boolean" default="false"/>
+    <aura:attribute name="hasTwoPlayers" type="Boolean" default="false"/>
+    <aura:attribute name="isWhiteDraggable" type="Boolean" default="true"/>
+    <aura:attribute name="isBlackDraggable" type="Boolean" default="false"/>
+    
+    
+    <aura:if isTrue="{! !v.hasTwoPlayers }">
+        <lightning:card>
+            <aura:if isTrue="{! !v.hasChosenWhite }">
+                <lightning:button label="Choose White" title="White" onclick="{! c.choosewhite }"/> 
+            </aura:if>
+            <aura:if isTrue="{! !v.hasChosenBlack }">
+                <lightning:button label="Choose Black" title="" onclick="{! c.chooseblack }"/>
+            </aura:if>
+        </lightning:card>
+    </aura:if>
+    <aura:if isTrue="{! v.hasTwoPlayers }">    
+        <lightning:card>
+            <!-- Form for subscribing/unsubscribing to/from events -->
+            <lightning:button label="Quit match" onclick="{! c.unsubscribe }" disabled="{!empty(v.subscription)}"/>
+            <table id="mytable">
+                <!-- <caption>Chess</caption> -->
+                <tbody>
+                    <tr>
+                        <th></th>
+                        <th>a</th>
+                        <th>b</th>
+                        <th>c</th>
+                        <th>d</th>
+                        <th>e</th>
+                        <th>f</th>
+                        <th>g</th>
+                        <th>h</th>
+                    </tr>
+                    <tr>
+                        <th style="text-align: right">8</th>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light">
+                            <img src="{!$Resource.chess + '/pieces/Torre-Preta.svg'}" draggable="{! v.isBlackDraggable }" ondragstart="{!c.onDragStart}" class="black black-rook"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark">
+                            <img src="{!$Resource.chess + '/pieces/Cavalo-Preto.svg'}" draggable="{! v.isBlackDraggable }" ondragstart="{!c.onDragStart}" class="black black-knight"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light">
+                            <img src="{!$Resource.chess + '/pieces/Bispo-Preto.svg'}" draggable="{! v.isBlackDraggable }" ondragstart="{!c.onDragStart}" class="black black-bishop"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark">
+                            <img src="{!$Resource.chess + '/pieces/Rainha-Preta.svg'}" draggable="{! v.isBlackDraggable }" ondragstart="{!c.onDragStart}" class="black black-queen"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light">
+                            <img src="{!$Resource.chess + '/pieces/Rei-Preto.svg'}" draggable="{! v.isBlackDraggable }" ondragstart="{!c.onDragStart}" class="black black-king"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark">
+                            <img src="{!$Resource.chess + '/pieces/Bispo-Preto.svg'}" draggable="{! v.isBlackDraggable }" ondragstart="{!c.onDragStart}" class="black black-bishop"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light">
+                            <img src="{!$Resource.chess + '/pieces/Cavalo-Preto.svg'}" draggable="{! v.isBlackDraggable }" ondragstart="{!c.onDragStart}" class="black black-knight"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark">
+                            <img src="{!$Resource.chess + '/pieces/Torre-Preta.svg'}" draggable="{! v.isBlackDraggable }" ondragstart="{!c.onDragStart}" class="black black-rook"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: right">7</th>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark">
+                            <img src="{!$Resource.chess + '/pieces/Peao-Preto.svg'}" draggable="{! v.isBlackDraggable }" ondragstart="{!c.onDragStart}" class="black black-pawn "/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light">
+                            <img src="{!$Resource.chess + '/pieces/Peao-Preto.svg'}" draggable="{! v.isBlackDraggable }" ondragstart="{!c.onDragStart}" class="black black-pawn"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark">
+                            <img src="{!$Resource.chess + '/pieces/Peao-Preto.svg'}" draggable="{! v.isBlackDraggable }" ondragstart="{!c.onDragStart}" class="black black-pawn"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light">
+                            <img src="{!$Resource.chess + '/pieces/Peao-Preto.svg'}" draggable="{! v.isBlackDraggable }" ondragstart="{!c.onDragStart}" class="black black-pawn"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark">
+                            <img src="{!$Resource.chess + '/pieces/Peao-Preto.svg'}" draggable="{! v.isBlackDraggable }" ondragstart="{!c.onDragStart}" class="black black-pawn"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light">
+                            <img src="{!$Resource.chess + '/pieces/Peao-Preto.svg'}" draggable="{! v.isBlackDraggable }" ondragstart="{!c.onDragStart}" class="black black-pawn"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark">
+                            <img src="{!$Resource.chess + '/pieces/Peao-Preto.svg'}" draggable="{! v.isBlackDraggable }" ondragstart="{!c.onDragStart}" class="black black-pawn"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light">
+                            <img src="{!$Resource.chess + '/pieces/Peao-Preto.svg'}" draggable="{! v.isBlackDraggable }" ondragstart="{!c.onDragStart}" class="black black-pawn"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: right">6</th>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark"></td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: right">5</th>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light"></td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: right">4</th>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark"></td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: right">3</th>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark"></td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light"></td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: right">2</th>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light">
+                            <img src="{!$Resource.chess + '/pieces/Peao-Branco.svg'}" draggable="{! v.isWhiteDraggable }" ondragstart="{!c.onDragStart}" class="white white-pawn"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark">
+                            <img src="{!$Resource.chess + '/pieces/Peao-Branco.svg'}" draggable="{! v.isWhiteDraggable }" ondragstart="{!c.onDragStart}" class="white white-pawn"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light">
+                            <img src="{!$Resource.chess + '/pieces/Peao-Branco.svg'}" draggable="{! v.isWhiteDraggable }" ondragstart="{!c.onDragStart}" class="white white-pawn"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark">
+                            <img src="{!$Resource.chess + '/pieces/Peao-Branco.svg'}" draggable="{! v.isWhiteDraggable }" ondragstart="{!c.onDragStart}" class="white white-pawn"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light">
+                            <img src="{!$Resource.chess + '/pieces/Peao-Branco.svg'}" draggable="{! v.isWhiteDraggable }" ondragstart="{!c.onDragStart}" class="white white-pawn"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark">
+                            <img src="{!$Resource.chess + '/pieces/Peao-Branco.svg'}" draggable="{! v.isWhiteDraggable }" ondragstart="{!c.onDragStart}" class="white white-pawn"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light">
+                            <img src="{!$Resource.chess + '/pieces/Peao-Branco.svg'}" draggable="{! v.isWhiteDraggable }" ondragstart="{!c.onDragStart}" class="white white-pawn"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark">
+                            <img src="{!$Resource.chess + '/pieces/Peao-Branco.svg'}" draggable="{! v.isWhiteDraggable }" ondragstart="{!c.onDragStart}" class="white white-pawn"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: right">1</th>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark">
+                            <img src="{!$Resource.chess + '/pieces/Torre-Branca.svg'}" draggable="{! v.isWhiteDraggable }" ondragstart="{!c.onDragStart}" class="white white-rook"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light">
+                            <img src="{!$Resource.chess + '/pieces/Cavalo-Branco.svg'}" draggable="{! v.isWhiteDraggable }" ondragstart="{!c.onDragStart}" class="white white-knight"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark">
+                            <img src="{!$Resource.chess + '/pieces/Bispo-Branco.svg'}" draggable="{! v.isWhiteDraggable }" ondragstart="{!c.onDragStart}" class="white white-bihsop"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light">
+                            <img src="{!$Resource.chess + '/pieces/Rainha-Branca.svg'}" draggable="{! v.isWhiteDraggable }" ondragstart="{!c.onDragStart}" class="white white-queen"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark">
+                            <img src="{!$Resource.chess + '/pieces/Rei-Branco.svg'}" draggable="{! v.isWhiteDraggable }" ondragstart="{!c.onDragStart}" class="white white-king"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light">
+                            <img src="{!$Resource.chess + '/pieces/Bispo-Branco.svg'}" draggable="{! v.isWhiteDraggable }" ondragstart="{!c.onDragStart}" class="white white-bishop"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="dark">
+                            <img src="{!$Resource.chess + '/pieces/Cavalo-Branco.svg'}" draggable="{! v.isWhiteDraggable }" ondragstart="{!c.onDragStart}" class="white white-knight"/>
+                        </td>
+                        <td ondrop="{!c.onDrop}" ondragover="{!c.allowDrop}" class="light">
+                            <img src="{!$Resource.chess + '/pieces/Torre-Branca.svg'}" draggable="{! v.isWhiteDraggable }" ondragstart="{!c.onDragStart}" class="white white-rook"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </lightning:card>
+    </aura:if>
+</aura:component>

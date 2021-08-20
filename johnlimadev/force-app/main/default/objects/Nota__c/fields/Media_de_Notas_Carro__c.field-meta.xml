@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Media_de_Notas_Carro__c</fullName>
+    <externalId>false</externalId>
+    <formula>( Baliza_Carro__c  + Aclive_e_Declive_Carro__c + Estacionamento_Carro__c  +  Semaforo_Carro__c  + Curvas_Carro__c   +  Rotatoria_Carro__c ) / 6</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Média de Notas (Carro)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>johnmaykbrito@gmail.com</contactEmail>
+    <label>SFDC Stop Connected App</label>
+    <oauthConfig>
+        <callbackUrl>https://johnlima-dev-ed.lightning.force.com/callback</callbackUrl>
+        <consumerKey>3MVG9KsVczVNcM8xw98noWJmRt_qX4AsjpsCC_AJnjJBiDIOKApfvn64WvAJYUZ..zHpPAvBPb3ZTE8BGiYy5</consumerKey>
+        <isAdminApproved>true</isAdminApproved>
+        <isConsumerSecretOptional>false</isConsumerSecretOptional>
+        <isIntrospectAllTokens>false</isIntrospectAllTokens>
+        <isSecretRequiredForRefreshToken>false</isSecretRequiredForRefreshToken>
+        <scopes>Full</scopes>
+    </oauthConfig>
+    <oauthPolicy>
+        <ipRelaxation>BYPASS</ipRelaxation>
+        <refreshTokenPolicy>zero</refreshTokenPolicy>
+    </oauthPolicy>
+</ConnectedApp>

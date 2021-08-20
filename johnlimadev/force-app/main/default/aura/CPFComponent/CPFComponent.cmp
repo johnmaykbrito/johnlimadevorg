@@ -1,0 +1,49 @@
+<aura:component implements="force:appHostable,flexipage:availableForRecordHome,flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName" access="global" controller="CPFControllerServerSide">
+	
+	<!-- https://developer.salesforce.com/forums/?id=9060G0000005MCPQA2 -->
+    <aura:attribute name="record" type="Object" description="The record object to be displayed"/>
+    <aura:attribute name="currentRecord" type="Object" description="A simplified view record object to be displayed"/>
+    <aura:attribute name="recordError" type="String" description="An error message bound to force:recordData"/>
+    <force:recordData aura:id="record" layoutType="FULL" recordId="{!v.recordId}" targetError="{!v.recordError}" targetRecord="{!v.record}" targetFields="{!v.currentRecord }" mode="EDIT"/>
+    <!-- attr MODE is very important here -->
+
+    <aura:attribute name="conta" type="Account" default="{'sobjectType': 'Account', 'Id': '', 'CPF__c': ''}"/>
+
+	<div class="slds-box slds-theme--default slds-container--x-large divCss">
+    	<!-- <p>Hello, {!v.currentRecord.Name}</p> -->
+    	<form class="slds-form--stacked">
+    		<lightning:layout>
+    			<lightning:layoutItem size="6" padding="around-small">
+		    		<lightning:input type="text" aura:id="cpfform" label="CPF"
+		                             name="cpf"
+		                             value="{!v.currentRecord.CPF__c}"
+		                             required="false"
+		                             placeholder="000.000.000-00"
+		                             disabled="true"/>
+                </lightning:layoutItem>
+                <lightning:layoutItem size="6" padding="around-small">
+		    		<lightning:input type="text" aura:id="cpfform" label="Novo CPF"
+		                             name="novocpf"
+		                             value="{!v.conta.CPF__c}"
+		                             required="false"
+		                             placeholder="000.000.000-00"
+		                             />
+		                             <!-- messageWhenPatternMismatch="Não está seguindo o padrão do CPF." -->
+		                             <!-- pattern="(\d{3}.\d{3}.\d{3}-\d{2})" -->
+                </lightning:layoutItem>
+    		</lightning:layout>
+    		<lightning:layout>
+    			<lightning:layoutItem size="6" padding="around-small">
+		    		<lightning:button label="Salvar" 
+                                      class="slds-m-top--medium"
+                                      variant="neutral"
+                                      onclick="{!c.updateCPF}"/>
+                    <lightning:button label="Excluir Log" 
+                                      class="slds-m-top--medium"
+                                      variant="destructive"
+                                      onclick="{!c.deleteLogCPF}"/>
+                </lightning:layoutItem>
+    		</lightning:layout>
+    	</form>
+   	</div>
+</aura:component>

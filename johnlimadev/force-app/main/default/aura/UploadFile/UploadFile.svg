@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="120px" height="120px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">    
+        <path d="M60 70 l30 -20 l30 20 v30 l-30 20 l-30 -20 Z" id="bottom-right" fill="#EA6151"/>
+        <path d="M0 70 l30 -20 l30 20 v30 l-30 20 l-30 -20 Z" id="bottom-left" fill="#2D71B8"/>
+        <path d="M30 20 l30 -20 l30 20 v30 l-30 20 l-30 -20 Z" id="top" fill="#90D1EF"/>
+	</g>
+</svg>

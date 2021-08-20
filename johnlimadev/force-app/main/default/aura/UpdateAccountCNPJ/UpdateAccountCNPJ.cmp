@@ -1,0 +1,75 @@
+<aura:component controller="UpdateAccountCNPJApexController" implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global" >
+    <aura:html tag="style">
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+        .slds-p-around–medium {
+        padding: 0rem !important;
+        }
+        .slds-modal__content{
+        overflow-y:hidden !important;
+        height:unset !important;
+        max-height:unset !important;
+        }
+    </aura:html>
+    <!-- Modal dimensions -->
+    <ltng:require styles="{!$Resource.CNPJ_Modal_Width_Expand + '/cnpj_modal.css'}" />
+    <!-- Spinner -->
+    <aura:attribute name="loading" type="Boolean" default="TRUE" />
+    <aura:attribute name="usingInfo" type="Boolean" default="FALSE" />
+    
+    <aura:attribute name="record" type="Object"
+                    description="The record object to be displayed"/>
+    <aura:attribute name="AcctRecord" type="Object"
+                    description="A simplified view record object to be displayed"/>
+    <aura:attribute name="recordError" type="String"
+                    description="An error message bound to force:recordData"/>
+    
+    <force:recordData aura:id="record"
+                      layoutType="FULL"
+                      recordId="{!v.recordId}"
+                      targetError="{!v.recordError}"
+                      targetRecord="{!v.record}"
+                      targetFields="{!v.AcctRecord }"
+                      mode="VIEW"/>
+    
+    <aura:attribute name="CNPJ" type="String"
+                    description="CNPJ do registro" default="{!v.AcctRecord.nhoj__CNPJ__c}" access="GLOBAL"/>
+    <aura:attribute name="AcctName" type="String"
+                    description="Name do registro" default="{!v.AcctRecord.Name}" access="GLOBAL"/>
+    
+    <aura:attribute name="options" type="List" access="PRIVATE"/>
+    <aura:attribute name="selectedValue" type="String" access="PRIVATE"/>
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    
+    
+    
+    <lightning:card>
+        <aura:if isTrue="{! v.loading }">
+            <lightning:spinner size="medium" />
+        </aura:if>
+        <aura:if isTrue="{! v.usingInfo }">
+            
+            <lightning:progressIndicator aura:id="progress" currentStep="1" type="base" hasError="false" variant="base">
+                <lightning:progressStep label="Buscando dados" value="1"/>
+                <lightning:progressStep label="Validando dados" value="2"/>
+                <lightning:progressStep label="Atualizando registro" value="3"/>
+            </lightning:progressIndicator>
+            
+            <aura:set attribute="else">                
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-size_2-of-3 slds-align-bottom">
+                        <lightning:select name="companyId" aura:id="companyId" value="{!v.selectedValue}" label="Escolha uma empresa:">
+                            <aura:iteration items="{!v.options}" var="option">
+                                <option text="{!option.label}" value="{!option.id}" selected="{!option.selected}"/>
+                            </aura:iteration>
+                        </lightning:select>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3 slds-align-bottom">
+                        <lightning:button label="Usar Informações" variant="neutral" onclick="{! c.handleClick }" class="slds-align_absolute-center"/>
+                    </div>
+                </div>
+            </aura:set>
+        </aura:if>
+    </lightning:card>
+</aura:component>

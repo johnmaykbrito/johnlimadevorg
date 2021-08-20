@@ -1,0 +1,20 @@
+.THIS caption {
+    text-align: center;
+    font-weight: bold;
+    font-size: xx-large;
+}
+.THIS table {
+    margin: 0 auto;
+}
+.THIS td {
+    width: 49px;
+    height: 49px;
+    border: 3px solid gray;
+}
+
+.THIS .light { background: #eee; }
+.THIS .dark { background: gray; }
+
+.THIS div {
+    text-align: center;
+}

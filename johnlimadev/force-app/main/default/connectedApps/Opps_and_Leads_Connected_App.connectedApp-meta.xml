@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>johnlima@gmail.com</contactEmail>
+    <iconUrl>https://login.salesforce.com/logos/Custom/Diamond_Grey/icon.svg</iconUrl>
+    <label>Opps and Leads Connected App</label>
+    <logoUrl>https://login.salesforce.com/logos/Custom/Diamond_Grey/logo.png</logoUrl>
+    <oauthConfig>
+        <callbackUrl>https://</callbackUrl>
+        <consumerKey>3MVG9KsVczVNcM8xw98noWJmRt6ylqwb.vIcS7qbKZDMWlWUKpaCO1BeQYMJAGGES3YMkAhP12ypkQI3RHQF5</consumerKey>
+        <isAdminApproved>false</isAdminApproved>
+        <isConsumerSecretOptional>false</isConsumerSecretOptional>
+        <isIntrospectAllTokens>false</isIntrospectAllTokens>
+        <isSecretRequiredForRefreshToken>false</isSecretRequiredForRefreshToken>
+        <scopes>Full</scopes>
+    </oauthConfig>
+    <oauthPolicy>
+        <ipRelaxation>BYPASS</ipRelaxation>
+        <refreshTokenPolicy>zero</refreshTokenPolicy>
+    </oauthPolicy>
+</ConnectedApp>

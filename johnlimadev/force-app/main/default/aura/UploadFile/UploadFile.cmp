@@ -1,0 +1,17 @@
+<aura:component controller="uploadFileUController" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+	<aura:attribute name="accept" type="List" default="['.jpg', '.jpeg', '.pdf', '.xml']"/>
+    <aura:attribute name="multiple" type="Boolean" default="false"/>
+    <aura:attribute name="disabled" type="Boolean" default="false"/>
+    
+    <aura:attribute name="currentUser" type="SObject"/>
+
+    <lightning:fileUpload  name="fileUploader"
+                           label= "{!v.currentUser.Id}"
+                           multiple="{!v.multiple}"
+                           accept="{!v.accept}"
+                           disabled="{!v.disabled}"
+                           recordId="{!v.currentUser.Id}"
+                           onuploadfinished="{! c.handleUploadFinished }"/>
+</aura:component>

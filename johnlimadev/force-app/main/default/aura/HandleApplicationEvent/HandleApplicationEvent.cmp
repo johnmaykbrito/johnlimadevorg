@@ -1,0 +1,34 @@
+<aura:component
+  implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId"
+  access="global"
+>
+  <aura:handler event="c:EventAppExample" action="{!c.handleComponentEvent}" />
+  <aura:attribute name="receive" type="String" />
+  <lightning:card>
+    <h1 class="slds-text-heading_small">Evento do tipo <b>APPLICATION</b></h1>
+    <ul class="slds-list--dotted">
+      <li
+        ><p
+          >É necessário este componente estar na mesma <i>page</i> para que o
+          <i><b>application event</b></i> funcione corretamente.</p
+        ></li
+      >
+      <li
+        ><p
+          >O <i>aura:handler</i> de um <i><b>APPLICATION event</b></i> não pode
+          ter o atributo <i>name</i>. Senão, dá pau.</p
+        ></li
+      >
+      <li
+        ><p
+          >Para passar um atributo para um componente filho, não há necessidade
+          de usar um evento APPLICATION. Funciona, mas você pode simplesmente
+          enviar o dado como atributo do componente.</p
+        ></li
+      >
+    </ul>
+    <div class="slds-box slds-m-around_x-small">
+      <p>Dado recebido via APPLICATION Event: <b>{!v.receive}</b></p>
+    </div>
+  </lightning:card>
+</aura:component>

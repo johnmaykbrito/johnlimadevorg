@@ -1,0 +1,9 @@
+Hi,
+
+A new oppty has been created for the Account - {!Opportunity.AccountId}.
+
+Details:
+Name - {!Opportunity.Name}
+Close Date - {!Opportunity.CloseDate}
+
+Regards

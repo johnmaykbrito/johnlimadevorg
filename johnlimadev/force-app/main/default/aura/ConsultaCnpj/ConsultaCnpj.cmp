@@ -1,0 +1,132 @@
+<aura:component controller="ConsultaCnpj" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId,flexipage:availableForAllPageTypes" access="global"
+>
+  <aura:attribute name="recordId" type="Id" />
+  <aura:attribute name="dsRecordId" type="Id" />
+  <aura:attribute name="sObject" type="SObject" />
+  <aura:attribute name="recordCnpj" type="String" />
+
+  <aura:attribute
+    name="fields"
+    type="String[]"
+    default="['Id', 'Name', 'CNPJ__c']"
+  />
+	
+  <aura:attribute name="tipo" type="String[]" default="numero,nome" />
+  <aura:attribute name="filtro" type="String" default="27865757000102" />
+  <aura:attribute name="loading" type="Boolean" default="false" />
+
+  <aura:attribute name="opcaoSelecionada" type="String" default="numero" />
+
+  <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+
+  <aura:handler event="ltng:selectSObject" action="{!c.recordChangeHandler}" />
+
+  <aura:registerEvent
+    name="ConsultaCnpjResultadoEvent"
+    type="c:ConsultaCnpjResultadoEvent"
+  />
+
+  <force:recordData
+    aura:id="service"
+    recordId="{!v.dsRecordId}"
+    targetFields="{!v.sObject}"
+    fields="{!v.fields}"
+    recordUpdated="{!c.onRecordUpdated}"
+  />
+
+  <div class="slds-page-header">
+    <div class="slds-page-header__row">
+      <div class="slds-page-header__col-title">
+        <div class="slds-media">
+          <div class="slds-media__figure">
+            <div class="icon-container">
+              <lightning:icon
+                iconName="standard:search"
+                size="large"
+                alternativeText="Consulta de CNPJ"
+                title="Consulta de CNPJ"
+              />
+            </div>
+          </div>
+          <div class="slds-media__body">
+            <div class="slds-page-header__name">
+              <div class="slds-page-header__name-title">
+                <h1>
+                  <span
+                    class="slds-page-header__title slds-truncate"
+                    title="Consulta de CNPJ"
+                    >Consulta de CNPJ</span
+                  >
+                </h1>
+              </div>
+            </div>
+            <!-- <p class="slds-page-header__name-meta">Consulta de CNPJ</p> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <lightning:card>
+    <aura:if isTrue="{! v.loading }">
+      <div class="slds-spinner_container">
+        <div role="status" class="slds-spinner slds-spinner_medium">
+          <span class="slds-assistive-text">Loading</span>
+          <div class="slds-spinner__dot-a"></div>
+          <div class="slds-spinner__dot-b"></div>
+        </div>
+      </div>
+    </aura:if>
+
+    <aura:set attribute="title">
+      <!-- <lightning:icon iconName="standard:search" size="small" /> -->
+      <!-- <span class="title">&nbsp;Consulta de CNPJ</span> -->
+    </aura:set>
+
+    <form class="slds-p-horizontal_medium slds-form--stacked">
+      <fieldset class="slds-form-element">
+        <legend class="slds-page-header__title slds-truncate"
+          >Consulta por:</legend
+        >
+        <div class="slds-p-vertical--medium">
+          <lightning:input
+            type="radio"
+            label="Número"
+            name="tipo"
+            checked="{!v.opcaoSelecionada == 'numero'}"
+            value="{!v.tipo[0]}"
+            onchange="{!c.opcaoChange}"
+          />
+
+          <lightning:input
+            type="radio"
+            label="Nome"
+            name="tipo"
+            checked="{!v.opcaoSelecionada == 'nome'}"
+            value="{!v.tipo[1]}"
+            onchange="{!c.opcaoChange}"
+          />
+        </div>
+
+        <lightning:input
+          aura:id="filtro"
+          name="filtro"
+          required="true"
+          value="{!v.filtro}"
+          label="Filtro"
+          messageWhenBadInput="Digite 14 números na sua busca (busca por número) ou informe no mínimo 3 letras (busca por nome)"
+        />
+
+        <lightning:button
+          iconName="utility:search"
+          label="Pesquisar"
+          class="slds-m-top--medium slds-button--neutral"
+          variant="brand"
+          onclick="{!c.buscarCnpj}"
+        />
+      </fieldset>
+    </form>
+
+    <c:ConsultaCnpjResultado />
+  </lightning:card>
+</aura:component>

@@ -1,0 +1,21 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:registerEvent name="cmpAccEvent" type="c:AccEventJohn"/>
+    <aura:attribute name="receber" type="String" />
+    <aura:registerEvent name="exampleApplicationEvent" type="c:EventAppExample"/>
+    <p>
+        <form class="slds-form--stacked">        
+            <lightning:button label="COMPONENT EVENT"
+                            class="slds-m-top--medium"
+                            variant="brand"
+                            onclick="{!c.fireComponentEvent}"/>
+            <lightning:button label="APPLICATION EVENT"
+                            class="slds-m-top--medium"
+                            variant="brand"
+                            onclick="{!c.appExample}"/>
+            
+        </form>
+    </p>
+    <div class="slds-box slds-m-around_x-small">
+        <p>Dado recebido do componente Pai via atributo: <b>{!v.receber}</b></p>
+    </div>
+</aura:component>

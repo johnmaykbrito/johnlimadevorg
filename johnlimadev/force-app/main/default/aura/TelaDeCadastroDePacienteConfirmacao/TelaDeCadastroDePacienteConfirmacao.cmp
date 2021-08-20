@@ -1,0 +1,5 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+    <aura:handler event="c:notificarMudancaDePagina" action="{!c.handleApplicationEvent}"/>
+    
+	<p>Confirmacao</p>
+</aura:component>

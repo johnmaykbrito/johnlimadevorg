@@ -1,0 +1,16 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:handler name="cmpAccEvent" event="c:AccEventJohn" action="{!c.handleComponentEvent}"/>
+    <aura:attribute name="information" type="String" default="Tenatious D" />
+    <lightning:card>
+        <h1 class="slds-text-heading_small">Evento do tipo <b>COMPONENT</b></h1>
+        <ul class="slds-list--dotted">
+            <li>
+                <p>Este tipo de evento só pode ser registrado (<i>aura:registerEvent</i>) em um <i>child component</i>... e o <i>aura:handler</i> no <i>parent component</i></p>
+            </li>
+            <li>
+                <p>O name do <i>aura:handler</i> tem de ser igual ao name do <i>aura:registerEvent</i></p>
+            </li>
+        </ul>
+        <c:EventSon receber="{!v.information}"/>
+    </lightning:card> 
+</aura:component>

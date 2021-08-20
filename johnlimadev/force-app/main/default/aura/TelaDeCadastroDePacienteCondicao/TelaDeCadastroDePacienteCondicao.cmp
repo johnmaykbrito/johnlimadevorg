@@ -1,0 +1,10 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+    <aura:handler event="c:notificarMudancaDePagina" action="{!c.handleApplicationEvent}"/>
+    <aura:handler event="c:transferirDadosEntrePaginas" action="{!c.handleDataTransfer}"/>
+    
+    <div class="row">
+        <h2 class="header">Condição do Paciente</h2>
+        <lightning:textarea name="input1" label="Descrição" required="true" />
+        <lightning:textarea name="input1" label="Alergias" required="true" placeholder="alergia1, alergia2, alergia3" />
+    </div>
+</aura:component>

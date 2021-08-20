@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>johnmaykbrito@gmail.com</contactEmail>
+    <description>For the last Trailhead unit about service integrations</description>
+    <iconUrl>https://login.salesforce.com/logos/Standard/default/icon.png</iconUrl>
+    <infoUrl>https://login.salesforce.com/logos/Standard/default/icon.png</infoUrl>
+    <label>Trailhead Connected</label>
+    <logoUrl>https://login.salesforce.com/logos/Standard/avatar_loading/logo.svg</logoUrl>
+    <oauthConfig>
+        <callbackUrl>https://localhost</callbackUrl>
+        <consumerKey>3MVG9KsVczVNcM8xw98noWJmRt9es8gs0HbZBpIk1.J4RRFZhEvy6aNhvRcN335eXyZosqvtpfo0yHXrI6ChK</consumerKey>
+        <isAdminApproved>false</isAdminApproved>
+        <isConsumerSecretOptional>false</isConsumerSecretOptional>
+        <isIntrospectAllTokens>false</isIntrospectAllTokens>
+        <isSecretRequiredForRefreshToken>false</isSecretRequiredForRefreshToken>
+        <scopes>Api</scopes>
+        <scopes>Full</scopes>
+        <scopes>Chatter</scopes>
+    </oauthConfig>
+    <oauthPolicy>
+        <ipRelaxation>BYPASS</ipRelaxation>
+        <refreshTokenPolicy>zero</refreshTokenPolicy>
+    </oauthPolicy>
+</ConnectedApp>

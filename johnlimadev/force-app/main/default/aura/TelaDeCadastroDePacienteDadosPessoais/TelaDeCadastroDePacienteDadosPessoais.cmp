@@ -1,0 +1,32 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+    <aura:attribute name="sexos" type="List" default="[
+    {'label': 'Masculino', 'value': 'Masculino'},
+    {'label': 'Feminino', 'value': 'Feminino'}
+    ]"/>
+    <aura:attribute name="primeiroNome" type="String"/>
+    <aura:attribute name="ultimoNome" type="String"/>
+    <aura:attribute name="dataDeNascimento" type="Date"/>
+    <aura:attribute name="radValue" type="String"/>
+    <aura:attribute name="telEmergencia" type="String"/>
+    
+    <aura:handler event="c:notificarMudancaDePagina" action="{!c.handleApplicationEvent}"/>
+    
+    <aura:registerEvent name="transferirDadosEntrePaginas" type="c:transferirDadosEntrePaginas"/>
+    
+    <lightning:card>
+        <div class="row">
+            <h2 class="header">Dados Pessoais</h2>
+            <lightning:input aura:id="primeiroNome" name="primeiroNome" label="Primeiro nome" required="true" value="{! v.primeiroNome}"/>
+            <lightning:input aura:id="ultimoNome" name="ultimoNome" label="Último nome"  required="true" value="{! v.ultimoNome}"/>
+            <lightning:input type="date" name="dataDeNascimento" label="Data de nascimento"  required="true" value="{! v.dataDeNascimento}"/>
+            <lightning:radioGroup name="Sexo"
+                          label="Radio Group"
+                          options="{! v.sexos }"
+                          value="{! v.radValue }"
+                          type="radio"
+                          required="true"
+                          onchange="{! c.handleSelectSex }" />
+            <lightning:input type="tel" label="Telefone de Emergência" name="telEmergencia" required="true" value="{! v.telEmergencia}"/>
+        </div>
+    </lightning:card>
+</aura:component>

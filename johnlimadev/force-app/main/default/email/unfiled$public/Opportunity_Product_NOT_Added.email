@@ -1,0 +1,5 @@
+Dear {!Opportunity.OwnerFullName},
+
+Please add the product for the Opportunity {!Opportunity.Name}.
+
+Regards.

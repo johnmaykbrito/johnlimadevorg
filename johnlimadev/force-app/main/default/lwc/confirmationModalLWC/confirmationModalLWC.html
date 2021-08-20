@@ -1,0 +1,29 @@
+<template>
+    <!-- <template if:true={profilenamebool}> -->
+        <!-- <template if:true={orderstatusbool}> -->
+            <div class="slds-modal__header slds-p-around--xx-small slds-size_1-of-1">
+                <h4 class="title slds-text-heading--medium"><b>Case Reopen</b></h4>
+            </div>
+            <div class="slds-align_absolute-center">
+                Are you sure you want to reopen Case {recordId}?
+            </div>
+            <br/>
+            <div class="slds-align_absolute-center slds-p-around--x-small">
+                <lightning-button-group>
+                    <lightning-button  label="Reopen" onclick={approvehandler}></lightning-button>
+                    <lightning-button  label="Cancel" onclick={closeQuickAction}></lightning-button>
+                </lightning-button-group>
+            </div>
+        <!-- </template> -->
+        <!-- <template if:false={orderstatusbool}> -->
+            <!-- <div class="slds-align_absolute-center">
+                Order is not in Pending Approval Status!
+            </div> -->
+        <!-- </template> -->
+    <!-- </template> -->
+    <!-- <template if:false={profilenamebool}> -->
+        <!-- <div class="slds-align_absolute-center">
+            You can not perform this operation
+        </div> -->
+    <!-- </template> -->
+</template>

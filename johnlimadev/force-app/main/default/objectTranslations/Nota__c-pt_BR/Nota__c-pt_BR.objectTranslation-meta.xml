@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Nota</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Notas</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>Nota Layout</layout>
+        <sections>
+            <label></label>
+            <section>Carro</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Moto</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label></label>
+        <name>Carro</name>
+    </recordTypes>
+    <recordTypes>
+        <label></label>
+        <name>Moto</name>
+    </recordTypes>
+</CustomObjectTranslation>

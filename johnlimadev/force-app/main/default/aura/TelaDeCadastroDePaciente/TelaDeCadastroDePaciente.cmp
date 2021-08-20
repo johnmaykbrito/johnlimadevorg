@@ -1,0 +1,51 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+    <aura:attribute name="pageNumber" type="Integer" default="1"/>
+    <aura:attribute name="currentStep" type="String" default="1"/>
+    
+    <aura:registerEvent name="notificarMudancaDePagina" type="c:notificarMudancaDePagina"/>
+    
+    
+    <lightning:card>
+        <div style="padding-right: 10px; padding-left: 10px;">
+            <div>
+                <lightning:progressIndicator currentStep="{!v.currentStep}" type="path" variant="base">
+                    <lightning:progressStep label="Dados Pessoais" value="1"/>
+                    <lightning:progressStep label="Condição" value="2"/>
+                    <lightning:progressStep label="Confirmação" value="3"/>
+                </lightning:progressIndicator>
+            </div>
+            
+            
+            
+            
+            
+            <aura:if isTrue="{!v.pageNumber == 1}">
+                <!-- invocar TelaDeCadastroDePacienteDadosPessoais -->
+                <c:TelaDeCadastroDePacienteDadosPessoais/>
+            </aura:if>
+            
+            <aura:if isTrue="{!v.pageNumber == 2}">
+                <!-- invocar TelaDeCadastroDePacienteCondicao -->
+                <c:TelaDeCadastroDePacienteCondicao/>
+            </aura:if>
+            
+            <aura:if isTrue="{!v.pageNumber == 3}">
+                <!-- invocar TelaDeCadastroDePacienteDadosConfirmacao -->
+                <c:TelaDeCadastroDePacienteConfirmacao/>
+            </aura:if>
+            
+            
+            
+            
+            
+            <lightning:buttonGroup>
+                <lightning:button variant="neutral" label="Voltar" onclick="{!c.handleclickongroupbuttons}" />
+                <lightning:button variant="neutral" label="Seguir" onclick="{!c.handleclickongroupbuttons}" />
+                <lightning:button variant="neutral" label="Salvar" onclick="{!c.handleclickongroupbuttons}" />
+                <lightning:buttonMenu alternativeText="Show menu" class="slds-button_last" onselect="{! c.handleSelect }">
+                    <lightning:menuItem label="Cancelar" value="Cancelar" />
+                </lightning:buttonMenu>
+            </lightning:buttonGroup>
+        </div>
+    </lightning:card>
+</aura:component>

@@ -1,0 +1,10 @@
+<aura:event type="APPLICATION" description="Event template" >
+    <!-- Tela 1 -->
+    <aura:attribute name="primeiroNome" type="String"/>
+    <aura:attribute name="ultimoNome" type="String"/>
+    <aura:attribute name="sexo" type="String"/>
+    <aura:attribute name="telefoneEmergencia" type="String"/>
+    <!-- Tela 2 -->
+    <aura:attribute name="descricao" type="String"/>
+    <aura:attribute name="alergias" type="String"/>
+</aura:event>

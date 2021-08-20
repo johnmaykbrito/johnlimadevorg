@@ -1,0 +1,164 @@
+<aura:component controller="GerarLinhaDeCuidado" implements="flexipage:availableForRecordHome,flexipage:availableForAllPageTypes,force:hasRecordId" access="global">
+        <aura:handler name="init" value="{!this}" action="{!c.myAction}" />
+
+        <!-- 0: show page 1, 1: show page 2, 2: show success message -->
+        <aura:attribute  name="showScreen" type="Integer" default="-1"/>
+        <aura:attribute  name="contasPesquisadas" type="List" default=""/>
+        <aura:attribute  name="contasEscolhidas" type="List" default=""/>
+        
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media">
+                        <div class="slds-media__figure">
+                            <div class='icon-container'>
+                                <lightning:icon iconName="action:fallback" size="large" alternativeText="Atribuição de Modelos de Cuidado" title="Atribuição de Modelos de Cuidado"/>
+                            </div>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span class="slds-page-header__title slds-truncate" title="Atribuição de Modelos de Cuidado em Massa">Atribuição de Modelos de Cuidado em Massa</span>
+                                    </h1>
+                                </div>
+                            </div>
+                            <p class="slds-page-header__name-meta">Atribua modelos a pacientes de forma rápida e eficaz.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                
+        <lightning:card>
+            <div class="slds-p-horizontal_small">
+                <aura:if isTrue="{! v.showScreen == 0}">
+                        <lightning:layout>
+                            <lightning:layoutItem size="6" padding="around-small">
+                                <div onkeyup="{! c.handleSearch }">
+                                    <lightning:input
+                                        aura:id="enter-search"
+                                        name="enter-search"
+                                        type="search"
+                                        placeholder="Digite aqui sua pesquisa"
+                                    />
+                                </div>
+                                <lightning:button label="Pesquisar" class="slds-m-top--medium" variant="brand" onclick="{! c.handleSearch}" disabled="false"/>    
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="6" padding="around-small">
+                                <!-- EMPTY BLOCK -->
+                            </lightning:layoutItem>
+                    </lightning:layout>
+                    <aura:if isTrue="{!v.contasPesquisadas.length > 0 || v.contasEscolhidas.length > 0}">
+                        <div class="slds-p-vertical_medium" />
+                        <div class="slds-border_top" />
+                        <div class="slds-p-vertical_medium" />
+                        <div class="slds-card">
+                            <lightning:layout>
+                                <lightning:layoutItem size="6" padding="around-small">
+                                    <div class="slds-page-header__name-title, slds-p-left_medium">
+                                        <h1>
+                                            <span class="slds-page-header__title">Resultado da Pesquisa</span>
+                                        </h1>
+                                    </div>
+                                    <lightning:accordion >
+                                        <lightning:accordionSection name="Pacientes" label="Pacientes">
+                                            <aura:set attribute="body">
+                                                <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                                                    <thead>
+                                                        <tr class="slds-text-title--caps">
+                                                            <th scope="col">
+                                                                <div class="slds-truncate" title="Nome">Nome</div>
+                                                            </th>
+                                                            <th scope="col">
+                                                                <div class="slds-truncate" title="Ação">Ação</div>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <aura:iteration items="{!v.contasPesquisadas}" var="con">
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    <div class="slds-truncate" >{! con.Name}</div>
+                                                                </th>
+                                                                <th scope="row">
+                                                                    <div class="slds-truncate">
+                                                                        <lightning:button aura:id="add" label="Adicionar" iconName="utility:add" variant="base" onclick="{! c.addOrRemButton}" disabled="false" value="{! con}"/>
+                                                                    </div>
+                                                                </th>
+                                                            </tr>
+                                                        </aura:iteration>
+                                                    </tbody>
+                                                </table>
+                                            </aura:set>
+                                        </lightning:accordionSection>
+                                    </lightning:accordion>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="6" padding="around-small">
+                                    <div class="slds-page-header__name-title, slds-p-left_medium">
+                                        <h1>
+                                            <span class="slds-page-header__title">Pacientes Selecionados</span>
+                                        </h1>
+                                    </div>
+                                        <lightning:accordion >
+                                        <lightning:accordionSection name="Pacientes" label="Pacientes">
+                                            <aura:set attribute="body">
+                                                <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                                                    <thead>
+                                                        <tr class="slds-text-title--caps">
+                                                            <th scope="col">
+                                                                <div class="slds-truncate" title="Nome">Nome</div>
+                                                            </th>
+                                                            <th scope="col">
+                                                                    <div class="slds-truncate" title="Ação">Ação</div>
+                                                                </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <aura:iteration items="{!v.contasEscolhidas}" var="con">
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    <div class="slds-truncate" >{! con.Name}</div>
+                                                                </th>
+                                                                <th scope="row">
+                                                                    <div class="slds-truncate">
+                                                                        <lightning:button aura:id="add" label="Remover" iconName="utility:undo" variant="base" onclick="{! c.addOrRemButton}" disabled="false" value="{! con}"/>
+                                                                    </div>
+                                                                </th>
+                                                            </tr>
+                                                        </aura:iteration>
+                                                    </tbody>
+                                                </table>
+                                            </aura:set>
+                                        </lightning:accordionSection>
+                                    </lightning:accordion>
+                                </lightning:layoutItem>
+                            </lightning:layout> 
+                            <!-- <lightning:layout> 
+                                <lightning:layoutItem size="6" padding="around-small">
+                                        <div class="slds-page-header__name-title, slds-p-left_medium">
+                                            <h1>
+                                                <span class="slds-page-header__title">Pacientes Selecionados</span>
+                                            </h1>
+                                        </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>     -->
+                        </div>
+                    </aura:if>
+                </aura:if>
+
+
+
+                <aura:if isTrue="{! v.showScreen == 1}"><h1>Segunda tela</h1></aura:if>
+                <aura:if isTrue="{! v.showScreen == 2}"><h1>Sucesso</h1></aura:if>
+            </div>
+
+            <!-- <footer class="slds-card__footer"> -->
+            <footer class="slds-docked-form-footer">
+                    <lightning:button label="Anterior" class="slds-m-top--medium" variant="neutral" onclick="{!c.myAction}" disabled="true"/>
+                    <lightning:button label="Próximo" class="slds-m-top--medium" variant="neutral" onclick="{!c.myAction}" disabled="false"/>
+                    <lightning:button label="Salvar" class="slds-m-top--medium, slds-hide" variant="brand" onclick="{!c.myAction}"/>
+            </footer>
+        </lightning:card>
+
+</aura:component>

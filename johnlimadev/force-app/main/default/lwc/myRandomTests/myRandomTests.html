@@ -1,0 +1,51 @@
+<template>
+    <lightning-card  title="TESTING ONE-WAY BINDING">
+        <div class="slds-grid">
+            
+            <!-- first column -->
+            <div class="slds-col slds-size_1-of-3">
+                <div class="slds-p-around_small">
+                    <lightning-input type="text" value={someString}></lightning-input>
+                </div>
+                
+                <div class="slds-p-around_small">
+                    <lightning-button variant="neutral" label="Update Value" onclick={handleClick} class="slds-p-right_small"></lightning-button>
+                    <lightning-button variant="neutral" label="Reset Value" onclick={handleClick} class="slds-p-right_small"></lightning-button>
+                </div>
+                <div class="slds-p-around_small">
+                    <div class="slds-text-title_caps" >Result: {someString}</div>
+                </div>
+            </div>
+            
+            <!-- second column -->
+            <div class="slds-col slds-size_1-of-3">
+                <div class="slds-p-around_small">
+                    <lightning-input type="text" value={favoriteColor} onkeyup={handleKeyUp}></lightning-input>
+                </div>
+                
+                <div class="slds-p-around_small">
+                    <lightning-button variant="neutral" label="Erase Value" onclick={handleClickFavoriteColor} class="slds-p-right_small"></lightning-button>
+                </div>
+                <div class="slds-p-around_small">
+                    <div class="slds-text-title_caps" >You Favorite Color is: {favoriteColor}</div>
+                </div>
+            </div>
+            
+            <!-- third column -->
+            <div class="slds-col slds-size_1-of-3">
+                <div class="slds-p-around_small">
+                    <span onkeypress={handleKeyPressForPetName}>
+                        <lightning-input type="text" value={petName} onchange={updatePetName} placeholder="Write and hit enter"></lightning-input>
+                    </span>
+                </div>
+                
+                <div class="slds-p-around_small slds-text-title_caps">
+                    <lightning-button variant="brand" label="Just Hit Enter" class="slds-p-right_small" disabled></lightning-button>
+                </div>
+                <div class="slds-p-around_small">
+                    <div class="slds-text-title_caps" >Pet Name Is: {petName}</div>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>
