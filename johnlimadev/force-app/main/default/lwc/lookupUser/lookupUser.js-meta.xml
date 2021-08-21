@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__HomePage</target>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <masterLabel>LookupUserField</masterLabel>
+    <description>Isolated field for searching users - by name - in the org. It should be nested in the lookupUserHarness LWC (or a custom harness LWC).</description>
+</LightningComponentBundle>

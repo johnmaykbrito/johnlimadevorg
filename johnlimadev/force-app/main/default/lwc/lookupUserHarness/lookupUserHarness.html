@@ -1,0 +1,7 @@
+<template>
+    <lightning-card variant="Narrow" title="Lookup User" icon-name="standard:user">
+        <c-lookup-user onrecordselection={onUserSelection}></c-lookup-user>
+        <p slot="footer">User Name: {toUserName}</p>
+        <p slot="footer">User Id: {toUserRecordId}</p>
+    </lightning-card>
+</template>
