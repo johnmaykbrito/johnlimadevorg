@@ -1,0 +1,75 @@
+<template>
+    <lightning-card>
+        <div class="slds-is-relative">
+            <div class="slds-m-around_medium">
+                <lightning-accordion class="warning-accordion" active-section-name={activeSections}
+                    allow-multiple-sections-open>
+                    <template if:true={showMsgWarningList}>
+                        <lightning-accordion-section name="Msg-Warning" label="Message Warnings">
+                            <lightning-accordion class="message-warning-accordion" active-section-name={activeSections}
+                                allow-multiple-sections-open>
+                                <template for:each={recordValitationResult.messages} for:item="msg">
+                                    <lightning-accordion-section name={msg.name} label={msg.name} key={mgs}>
+                                        <ul class="warning-ul">
+                                            <template for:each={msg.warningList} for:item="warning" for:index="i">
+                                                <li key={warning}>{warning}</li>
+                                            </template>
+                                        </ul>
+                                    </lightning-accordion-section>
+                                </template>
+                            </lightning-accordion>
+                        </lightning-accordion-section>
+                    </template>
+                    <template if:true={showMsgErrorList}>
+                        <lightning-accordion-section name="Msg-Error" label="Message Errors">
+                            <lightning-accordion class="message-error-accordion" active-section-name={activeSections}
+                                allow-multiple-sections-open>
+                                <template for:each={recordValitationResult.messages} for:item="msg">
+                                    <lightning-accordion-section name={msg.name} label={msg.name} key={mgs}>
+                                        <ul class="error-ul">
+                                            <template for:each={msg.errorList} for:item="error" for:index="i">
+                                                <li key={error}>{error}</li>
+                                            </template>
+                                        </ul>
+                                    </lightning-accordion-section>
+                                </template>
+                            </lightning-accordion>
+                        </lightning-accordion-section>
+                    </template>
+                    <template if:true={showAmtWarningList}>
+                        <lightning-accordion-section name="Amt-Warning" label="Amount Warnings">
+                            <lightning-accordion class="amount-warning-accordion" active-section-name={activeSections}
+                                allow-multiple-sections-open>
+                                <template for:each={recordValitationResult.amounts} for:item="amounts">
+                                    <lightning-accordion-section name={amounts.name} label={amounts.name} key={mgs}>
+                                        <ul class="warning-ul">
+                                            <template for:each={amounts.warningList} for:item="warning" for:index="i">
+                                                <li key={warning}>{warning}</li>
+                                            </template>
+                                        </ul>
+                                    </lightning-accordion-section>
+                                </template>
+                            </lightning-accordion>
+                        </lightning-accordion-section>
+                    </template>
+                    <template if:true={showAmtErrorList}>
+                        <lightning-accordion-section name="Amt-Error" label="Amount Errors">
+                            <lightning-accordion class="amount-error-accordion" active-section-name={activeSections}
+                                allow-multiple-sections-open>
+                                <template for:each={recordValitationResult.amounts} for:item="amounts">
+                                    <lightning-accordion-section name={amounts.name} label={amounts.name} key={mgs}>
+                                        <ul class="error-ul">
+                                            <template for:each={amounts.errorList} for:item="error" for:index="i">
+                                                <li key={error}>{error}</li>
+                                            </template>
+                                        </ul>
+                                    </lightning-accordion-section>
+                                </template>
+                            </lightning-accordion>
+                        </lightning-accordion-section>
+                    </template>
+                </lightning-accordion>
+            </div>
+        </div>
+    </lightning-card>
+</template>

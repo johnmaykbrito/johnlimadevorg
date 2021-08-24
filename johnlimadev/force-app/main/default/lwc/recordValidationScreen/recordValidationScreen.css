@@ -1,0 +1,13 @@
+.warning-ul li::before {
+    content: '⚠';
+    color: orange;
+    padding-right: .3125rem;
+    padding-left: 1.5rem;
+}
+
+.error-ul li::before {
+    content: '⛔';
+    color: red;
+    padding-right: .3125rem;
+    padding-left: 1.5rem;
+}
