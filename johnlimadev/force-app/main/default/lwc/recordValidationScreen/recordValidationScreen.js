@@ -10,14 +10,29 @@ export default class RecordValidationScreen extends LightningElement {
     @api showErrors;
     recordValitationResult = {};
     activeSections = [];
+    inicialActiveSections = [];
     showMsgWarningList = false;
     showMsgErrorList = false;
     showAmtWarningList = false;
     showAmtErrorList = false;
     isValidating = false;
+    btnLabel = 'Hide All';
 
     connectedCallback() {
         this.getRecordValidationJS();
+    }
+
+    handleClick() {
+        if (this.activeSections.length > 0) {
+            console.log(this.activeSections.length);
+            this.btnLabel = 'Show All';
+            this.activeSections = [];
+
+        }
+        else {
+            this.btnLabel = 'Hide All';
+            this.activeSections = this.inicialActiveSections;
+        }
     }
 
     validateComponentAttributes() {
@@ -41,6 +56,7 @@ export default class RecordValidationScreen extends LightningElement {
 
             this.recordValitationResult = result;
             this.openSections(this.recordValitationResult);
+            this.inicialActiveSections = this.activeSections;
             
             RECORD_VALIDATION_RESULT = this.recordValitationResult;
         })
@@ -71,7 +87,7 @@ export default class RecordValidationScreen extends LightningElement {
 
         if (data.amounts && data.amounts.length > 0) {
             if (!this.activeSections.includes('Amt-Warning')) {
-                this.showAmtWarningList = true;
+                this.showAmtWarningList = this.showWarnings;
                 this.activeSections.push('Amt-Warning');
             }
 
