@@ -1,0 +1,33 @@
+<template>
+    <lightning-card>
+        <div class="slds-m-horizontal_small slds-m-bottom_medium rem-m">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <lightning-avatar src={imageName} initials="" fallback-icon-name="standard:account"
+                    alternative-text={title} class="slds-m-right_small"></lightning-avatar>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <a href={website} target="_blank" class="slds-card__header-link slds-truncate" title={title}>
+                            <span>{title}</span>
+                        </a>
+                    </h2>
+                    <div class="slds-truncate">
+                        <span>{position}</span>&nbsp;
+                        <span class="slds-border_left"></span>&nbsp;
+                        <span class="slds-truncate">{period}</span>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="slds-border_top"></div>
+        <div class="slds-m-around_small">
+            <div>
+                <c-job at={job}></c-job>
+            </div>
+        </div>
+        <div class="slds-border_top"></div>
+        <div class="slds-m-around_small">
+            <a href={website} target="_blank"><button class="button"><span class="button-text">Go to
+                        website</span></button></a>
+        </div>
+    </lightning-card>
+</template>
