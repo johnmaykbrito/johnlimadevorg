@@ -1,0 +1,38 @@
+/* .container {
+    min-height: 9.375rem;
+} */
+.static-height {
+    min-height: 150px;
+}
+.profile-pic-div {
+    position: absolute;
+    top: -2rem;
+    min-width: 200px;
+    max-width: 200px;
+    border-radius: 50%;
+    background-color: white;
+    border: 1px solid rgb(217, 219, 221);
+}
+
+.profile-pic {
+    border-radius: 50%;
+}
+.profile-pic:hover{
+    opacity: .8;
+}
+
+.my-name {
+    font-size: 1.7rem;
+    font-weight: bolder;
+    color: #048149;
+}
+
+.work-at {
+    font-size: 1.4rem;
+    color: #1e1e1e;
+}
+
+.live-at {
+    font-size: 1.1rem;
+    color: #585858;
+}
