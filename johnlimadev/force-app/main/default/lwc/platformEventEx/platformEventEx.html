@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="Account Streaming" icon-name="custom:custom14">
+        <div class="slds-var-m-around_medium">
+            <template for:each={accountNameList} for:item="account" for:index="index">
+                <div key={account.Id}>
+                    <lightning-tile href={account.recPath} label="Accout Record" class="slds-var-m-around_medium">
+                        <p class="slds-truncate">
+                            <a href={account.recPath} target="_blank">{account.Name}</a>
+                        </p>
+                    </lightning-tile>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
