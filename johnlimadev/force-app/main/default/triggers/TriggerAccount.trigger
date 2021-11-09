@@ -7,6 +7,7 @@ trigger TriggerAccount on Account (before update, after update, before insert, a
         
     } else if (Trigger.isAfter && Trigger.isUpdate) {
         accountTriggerHandlerVar.checarOpps();
+        accountTriggerHandlerVar.alertUpdates();
         
     } else if (Trigger.isBefore && Trigger.isInsert) {
         accountTriggerHandlerVar.clearSpecialCharactersFromCNPJ(Trigger.new);

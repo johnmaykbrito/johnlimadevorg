@@ -13,6 +13,17 @@ public with sharing class AccountTriggerHandler {
         }
     }
 
+    public void alertUpdates() {
+        List<nhoj__Account_Update__e> events = new List<nhoj__Account_Update__e>();
+        for (Account acc : (List<Account>) Trigger.new) {
+            if (!((Account) Trigger.oldMap.get(acc.Id)).doAlertPlatform__c && acc.doAlertPlatform__c) {
+                nhoj__Account_Update__e event = new nhoj__Account_Update__e(Message__c = 'Account ' + acc.Name + '/' + acc.Id + ' was updated');
+                events.add(event);
+            }
+            
+            List<Database.SaveResult> publishingResults = EventBus.publish(events);
+        }
+    }
 
     // after update accounts
     public void checarOpps() {
