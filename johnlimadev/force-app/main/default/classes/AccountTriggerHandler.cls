@@ -17,7 +17,11 @@ public with sharing class AccountTriggerHandler {
         List<nhoj__Account_Update__e> events = new List<nhoj__Account_Update__e>();
         for (Account acc : (List<Account>) Trigger.new) {
             if (!((Account) Trigger.oldMap.get(acc.Id)).doAlertPlatform__c && acc.doAlertPlatform__c) {
-                nhoj__Account_Update__e event = new nhoj__Account_Update__e(Message__c = 'Account ' + acc.Name + '/' + acc.Id + ' was updated');
+                nhoj__Account_Update__e event = new nhoj__Account_Update__e(
+                    Message__c = 'Account ' + acc.Name + '/' + acc.Id + ' was updated',
+                    AccountId__c = acc.Id,
+                    AccountName__c = acc.Name
+                );
                 events.add(event);
             }
             
